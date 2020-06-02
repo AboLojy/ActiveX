@@ -50,7 +50,7 @@ class ADORecordSet extends RecordSet {
     public find = (criteria: string, skipRecords: number, searchDirection: number, start: number) => {
         var base = new ServerSide();
         var rsVM = new Object({  baseQuery: this.sql, criteria: criteria, skipRecords: skipRecords, searchDirection: searchDirection, start: start ,uniqueKey: this.uniqueKey});
-        var res = base.CallWithObject("POST", "/TEAM/TEAM/api/socman/Core/Find", rsVM) as IAjaxObject;
+        var res = base.CallWithObject("POST", "/Core/Find", rsVM) as IAjaxObject;
         return ADOConnection.WrapADORecordSet(res.uniqueKey ,res.result,this.sql,  this.currRSIndex);
 
     };
@@ -58,7 +58,7 @@ class ADORecordSet extends RecordSet {
     public filter = (criteria: string) => {
         var base = new ServerSide();
         var rsVM = new Object({ criteria: criteria,  uniqueKey: this.uniqueKey });
-        var res = base.CallWithObject("POST", "/TEAM/TEAM/api/socman/Core/filter", rsVM) as IAjaxObject;
+        var res = base.CallWithObject("POST", "/api/Core/filter", rsVM) as IAjaxObject;
         this.uniqueKey = res.uniqueKey;
         this.rows = res.result;
         this.rowCursor = 1;
@@ -112,31 +112,9 @@ class ADORecordSet extends RecordSet {
     Open(sQuery: string, conn: ADOConnection, cursorType: number=-1, lockType: number=-1, options: number = 0):Function {
         var base = new ServerSide();
         var rsVM = new Object({ callerObjId: conn.objectId, sQuery: sQuery, cursorLocation: this.CursorLocation, lockType, cursorType, options });
-        var res = base.CallWithObject("POST", "/TEAM/TEAM/api/socman/Core/Open", rsVM) as IAjaxObject;
+        var res = base.CallWithObject("POST", "/api/Core/Open", rsVM) as IAjaxObject;
         var result = ADOConnection.WrapADORecordSet(res.uniqueKey, res.result, this.sql, this.currRSIndex);
 
-        //Object.assign(this, result);
-        //this["rs"] = result.rs;
-        //this["uniqueKey"] = result["rs"].uniqueKey;
-        //this["Close"] = result["rs"].Close;
-        //this["close"] = result["rs"].Close;
-        //this["MoveNext"] = result["rs"].MoveNext;
-        //this["moveNext"] = result["rs"].MoveNext;
-        //this["MoveFirst"] = result["rs"].MoveFirst;
-        //this["moveFirst"] = result["rs"].MoveFirst;
-        //this["find"] = result["rs"].find;
-        //this["Find"] = result["rs"].find;
-        //this["fields"] = result["rs"].fields;
-        //this["getRowCursor"] = result["rs"].getRowCursor;
-        //this["getRows"] = result["rs"].getRows;
-        //this["NextRecordset"] = result["rs"].NextRecordset;
-        //this["NextRecordSet"] = result["rs"].NextRecordset;
-        //this["nextRecordset"] = result["rs"].NextRecordset;
-        //this["nextRecordSet"] = result["rs"].NextRecordset;
-        //this["Open"] = result["rs"].Open;
-        //this["open"] = result["rs"].Open;
-        //this["CursorLocation"] = result["rs"].CursorLocation;
-        //this["ActiveConnection"] = result["rs"].ActiveConnection;
         return result;
     }
 
