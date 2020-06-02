@@ -16,7 +16,7 @@ class ADOCommand {
         var base = new ServerSide();
 
         
-        var result = base.CallWithObject("POST", "/Core/ExecuteCommand",
+        var result = base.CallWithObject("POST", "/api/Core/ExecuteCommand",
             new Object({ sSql:this.CommandText, callerObjId: this.ActiveConnection.objectId, adExecuteStream: adExecuteStream })) as IAjaxObject;
         this.OutputStream.stream = result.result;
 
