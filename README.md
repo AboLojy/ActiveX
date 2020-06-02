@@ -8,7 +8,7 @@ just transpiler the ts files to a single javascript file the add the reference t
     
     var cnn = new ADOConnection();
     var arr = [];
-    var rs = conn.execute("select * from bla");
+    var rs = cnn.execute("select * from bla");
     while(rs.EOF){
         arr.push(rs(0));
         rs.next();
