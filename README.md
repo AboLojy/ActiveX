@@ -5,6 +5,15 @@ just transpiler the ts files to a single javascript file the add the reference t
 ```
     <script language="javascript" src="/ActiveX.js"></script>
     <script>
+    
+    var cnn = new ADOConnection();
+    var arr = [];
+    var rs = conn.execute("select * from bla");
+    while(rs.EOF){
+        arr.push(rs(0));
+        rs.next();
+    }
+   
     var xml = new ActiveXObject("MSXML2.DOMDocument.4.0") ;
     xml.load("http://resourceSite/xmlfile.xml")
     var xml = new ActiveXObject("Excel.Application") ;
