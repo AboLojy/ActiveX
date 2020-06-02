@@ -13,7 +13,8 @@ just transpiler the ts files to a single javascript file the add the reference t
         arr.push(rs(0));
         rs.next();
     }
-   
+    rs.Close();
+    
     var xml = new ActiveXObject("MSXML2.DOMDocument.4.0") ;
     xml.load("http://resourceSite/xmlfile.xml")
     var xml = new ActiveXObject("Excel.Application") ;
