@@ -21,7 +21,7 @@ class ADOConnection {
     Execute(sql: string): any {
         var base = new ServerSide();   
                     
-        var result = base.CallWithObject("POST", "/Core/Execute", new Object({ sSql: sql, callerObjId: this.objectId}) ) as IAjaxObject;
+        var result = base.CallWithObject("POST", "/api/Core/Execute", new Object({ sSql: sql, callerObjId: this.objectId}) ) as IAjaxObject;
         return ADOConnection.WrapADORecordSet( result.uniqueKey,result.result, sql);
     }
 
